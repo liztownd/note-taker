@@ -4,11 +4,24 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.16.4",
+    "nodemon": "^2.0.7",
+    "unique-random": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liztownd/note-taker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/liztownd/note-taker/issues"
+  },
+  "homepage": "https://github.com/liztownd/note-taker#readme"
 }
