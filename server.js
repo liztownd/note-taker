@@ -22,33 +22,35 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, "/public/notes
 
 app.get('/api/notes', (req, res) => { 
 
-        let notes = []
+        let notes;
 
-        fs.readFile('/db/db.json', 'utf-8', (err, data) => {
+        fs.readFile('db/db.json', 'utf-8', (err, data) => {
         if (err) throw err
         notes = JSON.parse(data)
+        console.log(data)
+        console.log(notes);
+
+        res.json(notes)
 
         })
 
-        res.json(notes)
-        console.log(notes);
         });
 
 app.post('/notes', (req, res) => {
     
     let notes = [];
     let newNote = req.body
-    res.json(newNote);
     
-    fs.readFile('/db/db.json', 'utf-8', (err, data) => {
+    fs.readFile('db/db.json', 'utf-8', (err, data) => {
     if (err) throw err
     notes = JSON.parse(data)
+    notes.push(newNote);
+    res.json(notes);
 
     })
 
-    notes.push(newNote);
 
-    fs.writeFile('/db/db.json', 'utf-8', JSON.stringify(notes), (err) => {
+    fs.writeFile('db/db.json', 'utf-8', JSON.stringify(notes), (err) => {
        if (err) throw err
     })
 
