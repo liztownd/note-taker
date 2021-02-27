@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const uniqueRandom = require("unique-random");
+const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 
 const app = express();
@@ -36,7 +36,7 @@ app.post('/api/notes', (req, res) => {
 
     let notes;
     let newNote = req.body;
-    newNote.id = 1;
+    newNote.id = uuidv4();
     console.log(newNote);
 
     fs.readFile('db/db.json', 'utf-8', (err, data) => {
@@ -50,7 +50,7 @@ app.post('/api/notes', (req, res) => {
         fs.writeFile('db/db.json', JSON.stringify(notes), (err) => {
             if (err) throw err
 
-            res.end;
+            res.json(notes);
 
 
         })
@@ -60,5 +60,40 @@ app.post('/api/notes', (req, res) => {
 
 
 })
+
+
+app.delete(`/api/notes`, (req, res) => {
+
+    let notes;
+    let deleteNote = req.body;
+    console.log(deleteNote);
+
+    fs.readFile('db/db.json', 'utf-8', (err, data) => {
+        if (err) throw err
+
+        notes = JSON.parse(data);
+
+        for (let i = 0; i < notes.length; i++ ) {
+            if (notes[i].id === deleteNote.id){
+                notes.splice(i, 1);
+            }
+        }
+
+        console.log(notes)
+
+        fs.writeFile('db/db.json', JSON.stringify(notes), (err) => {
+            if (err) throw err
+
+            res.json(notes);
+
+
+        })
+
+
+    })
+
+
+})
+
 
 app.listen(PORT, () => console.log(`App listening on PORT: ${PORT}`));
