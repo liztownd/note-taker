@@ -9,8 +9,6 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
-// app.use(express.static(__dirname + '/public/assets/css/styles.css'));
-// app.use(express.static(__dirname + '/public/assets/js/index.js'));
 
 
 
