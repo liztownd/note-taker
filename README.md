@@ -40,3 +40,4 @@ When a new note is added, a unique id is assigned server-side utilizing the <a h
 
 ## Deployment
 
+The app is deployed on Heroku at <a href="https://vast-caverns-20782.herokuapp.com/">https://vast-caverns-20782.herokuapp.com/</a>.
