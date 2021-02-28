@@ -62,11 +62,10 @@ app.post('/api/notes', (req, res) => {
 })
 
 
-app.delete(`/api/notes`, (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
 
     let notes;
-    let deleteNote = req.body;
-    console.log(deleteNote);
+    let deleteNote = req.params.id;
 
     fs.readFile('db/db.json', 'utf-8', (err, data) => {
         if (err) throw err
@@ -74,12 +73,11 @@ app.delete(`/api/notes`, (req, res) => {
         notes = JSON.parse(data);
 
         for (let i = 0; i < notes.length; i++ ) {
-            if (notes[i].id === deleteNote.id){
+            if (notes[i].id === deleteNote){
                 notes.splice(i, 1);
             }
         }
 
-        console.log(notes)
 
         fs.writeFile('db/db.json', JSON.stringify(notes), (err) => {
             if (err) throw err
